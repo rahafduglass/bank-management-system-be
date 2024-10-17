@@ -1,0 +1,64 @@
+package com.bank.backend.persistance.entity;
+
+import com.bank.backend.domain.enums.UserRole;
+import com.bank.backend.domain.enums.UserStatus;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity(name="sys_user")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Table(name="sys_user")
+public class SysUserEntity {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name="username")
+    private String username;
+
+    @Column(name="password")
+    private String password;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="fullName")
+    private String fullName;
+
+    @Column(name="phoneNumber")
+    private String phoneNumber;
+
+    @Column(name="nationlId")
+    private Long nationalId;
+
+    @Column(name="nationality")
+    private String nationality;
+
+    @Column(name="role")
+    private UserRole role;// enum
+
+    @Column(name="date-of-birth")
+    private String dateOfBirth;
+
+    @Column(name="address")
+    private String address;
+
+    @Column(name="createdAt")
+    private String createdAt;
+
+    @Column(name="updatedAt")
+    private String updatedAt;
+
+    @Column(name="statue")
+    private UserStatus statue;
+
+    @OneToOne
+    @JoinColumn(name = "bank_id", referencedColumnName = "id")
+    private BankAccountEntity bankAccounts;
+
+}
