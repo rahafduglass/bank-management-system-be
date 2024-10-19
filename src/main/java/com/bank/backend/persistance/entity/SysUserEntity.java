@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity(name="sys_user")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,47 +20,46 @@ public class SysUserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="username")
+    @Column(name="username", nullable = false)
     private String username;
 
-    @Column(name="password")
+    @Column(name="password", nullable = false)
     private String password;
 
-    @Column(name="email")
+    @Column(name="email", nullable = false)
     private String email;
 
-    @Column(name="fullName")
+    @Column(name="fullName", nullable = false)
     private String fullName;
 
-    @Column(name="phoneNumber")
+    @Column(name="phoneNumber", nullable = false)
     private String phoneNumber;
 
-    @Column(name="nationlId")
+    @Column(name="nationlId", nullable = false)
     private Long nationalId;
 
-    @Column(name="nationality")
+    @Column(name="nationality", nullable = false)
     private String nationality;
 
-    @Column(name="role")
+    @Column(name="role", nullable = false)
     private UserRole role;// enum
 
-    @Column(name="date-of-birth")
+    @Column(name="date-of-birth", nullable = false)
     private String dateOfBirth;
 
-    @Column(name="address")
+    @Column(name="address", nullable = false)
     private String address;
 
-    @Column(name="createdAt")
+    @Column(name="createdAt", nullable = false)
     private String createdAt;
 
     @Column(name="updatedAt")
     private String updatedAt;
 
-    @Column(name="statue")
+    @Column(name="statue", nullable = false)
     private UserStatus statue;
 
-    @OneToOne
-    @JoinColumn(name = "bank_id", referencedColumnName = "id")
-    private BankAccountEntity bankAccounts;
+    @OneToMany(mappedBy = "sys_user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<BankAccountEntity> bankAccounts;
 
 }

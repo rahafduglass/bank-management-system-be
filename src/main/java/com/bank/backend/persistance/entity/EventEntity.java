@@ -16,13 +16,17 @@ public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "event_type", nullable = false)
     private String eventType;
+
     @Lob
     @Column(name = "object", nullable = false)
     private Object object;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
     @Column(name = "user_id", nullable = false)
     private Long userId;
 }

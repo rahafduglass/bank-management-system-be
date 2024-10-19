@@ -13,11 +13,14 @@ import java.time.LocalDateTime;
 @Data
 @Table(name = "income_transaction")
 public class IncomeTransactionEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "amount", nullable = false)
     private Long amount;
+
     @Column(name = "description")
     private String description;
 

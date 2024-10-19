@@ -1,5 +1,7 @@
 package com.bank.backend.persistance.entity;
 
+import com.bank.backend.domain.enums.CardStatus;
+import com.bank.backend.domain.enums.CardType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

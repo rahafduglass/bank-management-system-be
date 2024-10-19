@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.smartcardio.Card;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -22,20 +21,20 @@ public class BankAccountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name="account_number",nullable = false, unique = true)
     private String accountNumber;
 
-    @Column(nullable = false)
+    @Column(name="account_type",nullable = false)
     private AccountType accountType;
 
-    @Column(nullable = false)
+    @Column(name="balance",nullable = false)
     private BigDecimal balance;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private SysUserEntity user;
 
-    @Column(nullable = false)
+    @Column(name="status",nullable = false)
     private AccountStatus status;
 
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -44,12 +43,12 @@ public class BankAccountEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "bankAccount")
-    private Set<Card> cards;
+    @OneToMany(mappedBy = "bank_account")
+    private Set<CardsEntity> cards;
 
-    @OneToMany(mappedBy = "bankAccount")
-    private Set<IncomeTransaction> incomeTransactions;
+    @OneToMany(mappedBy = "bank_account")
+    private Set<IncomeTransactionEntity> incomeTransactions;
 
-    @OneToMany(mappedBy = "bankAccount")
-    private Set<OutcomeTransaction> outcomeTransactions;
+    @OneToMany(mappedBy = "bank_account")
+    private Set<OutcomeTransactionEntity> outcomeTransactions;
 }
