@@ -20,46 +20,46 @@ public class SysUserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="username", nullable = false)
+    @Column(name="username")
     private String username;
 
-    @Column(name="password", nullable = false)
+    @Column(name="password")
     private String password;
 
-    @Column(name="email", nullable = false)
+    @Column(name="email")
     private String email;
 
-    @Column(name="fullName", nullable = false)
+    @Column(name="fullName")
     private String fullName;
 
-    @Column(name="phoneNumber", nullable = false)
+    @Column(name="phoneNumber")
     private String phoneNumber;
 
-    @Column(name="nationlId", nullable = false)
+    @Column(name="nationlId")
     private Long nationalId;
 
-    @Column(name="nationality", nullable = false)
+    @Column(name="nationality")
     private String nationality;
 
-    @Column(name="role", nullable = false)
+    @Column(name="role")
     private UserRole role;// enum
 
-    @Column(name="date-of-birth", nullable = false)
+    @Column(name="date-of-birth")
     private String dateOfBirth;
 
-    @Column(name="address", nullable = false)
+    @Column(name="address")
     private String address;
 
-    @Column(name="createdAt", nullable = false)
+    @Column(name="createdAt")
     private String createdAt;
 
     @Column(name="updatedAt")
     private String updatedAt;
 
-    @Column(name="statue", nullable = false)
+    @Column(name="statue")
     private UserStatus statue;
 
-    @OneToMany(mappedBy = "sys_user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sys_user")
     private Set<BankAccountEntity> bankAccounts;
 
 }

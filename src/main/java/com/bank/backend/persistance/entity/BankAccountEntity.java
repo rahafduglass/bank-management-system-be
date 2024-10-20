@@ -21,23 +21,19 @@ public class BankAccountEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="account_number",nullable = false, unique = true)
+    @Column(name="account_number")
     private String accountNumber;
 
-    @Column(name="account_type",nullable = false)
+    @Column(name="account_type")
     private AccountType accountType;
 
-    @Column(name="balance",nullable = false)
+    @Column(name="balance")
     private BigDecimal balance;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private SysUserEntity user;
-
-    @Column(name="status",nullable = false)
+    @Column(name="status")
     private AccountStatus status;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
@@ -51,4 +47,10 @@ public class BankAccountEntity {
 
     @OneToMany(mappedBy = "bank_account")
     private Set<OutcomeTransactionEntity> outcomeTransactions;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id" ,referencedColumnName = "id")
+    private SysUserEntity user;
+
 }

@@ -24,9 +24,6 @@ public class IncomeTransactionEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "bank_account_id")
-    private BankAccountEntity bankAccount;
 
     @Column(name = "transaction_date")
     private LocalDateTime transactionDate;
@@ -36,4 +33,9 @@ public class IncomeTransactionEntity {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "bank_account_id", referencedColumnName = "id")
+    private BankAccountEntity bankAccount;
+
 }

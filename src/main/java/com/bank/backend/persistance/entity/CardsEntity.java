@@ -19,14 +19,14 @@ public class CardsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "card_number", nullable = false, unique = true)
+    @Column(name = "card_number")
     private String cardNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "card_type", nullable = false)
+    @Column(name = "card_type")
     private CardType cardType;
 
-    @Column(name = "expiry_date", nullable = false)
+    @Column(name = "expiry_date")
     private LocalDateTime expiryDate;
 
     @Column(name = "cvv")
@@ -35,15 +35,15 @@ public class CardsEntity {
     @Column(name = "status")
     private CardStatus status;
 
-    @ManyToOne
-    @JoinColumn(name = "bank_account_id", referencedColumnName = "id")
-    private BankAccountEntity bankAccount;
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "bank_account_id", referencedColumnName = "id")
+    private BankAccountEntity bankAccount;
 // i am here :D
     // alaa
 }
