@@ -12,26 +12,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IncomeTransaction {
-
     private Long id;
-
 
     private Long amount;
 
-
     private String description;
-
-
 
     private LocalDateTime transactionDate;
 
-
     private LocalDateTime createdAt;
-
 
     private LocalDateTime updatedAt;
 
-
     private Long bankAccountId;
-
 }

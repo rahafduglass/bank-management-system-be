@@ -48,7 +48,6 @@ public class BankAccountEntity {
     @OneToMany(mappedBy = "bank_account")
     private Set<OutcomeTransactionEntity> outcomeTransactions;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id" ,referencedColumnName = "id")
     private SysUserEntity user;
