@@ -18,20 +18,20 @@ public class IncomeTransactionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount")
     private Long amount;
 
     @Column(name = "description")
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "bank_account_id", nullable = false)
+    @JoinColumn(name = "bank_account_id")
     private BankAccountEntity bankAccount;
 
-    @Column(name = "transaction_date", nullable = false)
+    @Column(name = "transaction_date")
     private LocalDateTime transactionDate;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")

@@ -29,18 +29,17 @@ public class CardsEntity {
     @Column(name = "expiry_date", nullable = false)
     private LocalDateTime expiryDate;
 
-    @Column(name = "cvv", nullable = false)
+    @Column(name = "cvv")
     private String cvv;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private CardStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bank_account_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "bank_account_id", referencedColumnName = "id")
     private BankAccountEntity bankAccount;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
