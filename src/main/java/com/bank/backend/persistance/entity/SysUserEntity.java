@@ -61,5 +61,4 @@ public class SysUserEntity {
 
     @OneToMany(mappedBy = "sys_user")
     private Set<BankAccountEntity> bankAccounts;
-
 }

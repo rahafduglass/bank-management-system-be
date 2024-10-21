@@ -8,3 +8,8 @@ import org.springframework.stereotype.Service;
 public class BankAccountService {
 
 }
+// function that generate bank
+// 1- account number &
+// 2- iban
+// each generated number must be unique
+

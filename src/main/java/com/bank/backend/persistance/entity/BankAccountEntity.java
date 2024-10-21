@@ -27,6 +27,9 @@ public class BankAccountEntity {
     @Column(name="account_type")
     private AccountType accountType;
 
+    @Column(name = "iban") //International Bank Account Number
+    private String iban;
+
     @Column(name="balance")
     private BigDecimal balance;
 
@@ -39,6 +42,10 @@ public class BankAccountEntity {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id" ,referencedColumnName = "id")
+    private SysUserEntity user;
+
     @OneToMany(mappedBy = "bank_account")
     private Set<CardsEntity> cards;
 
@@ -47,9 +54,26 @@ public class BankAccountEntity {
 
     @OneToMany(mappedBy = "bank_account")
     private Set<OutcomeTransactionEntity> outcomeTransactions;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id" ,referencedColumnName = "id")
-    private SysUserEntity user;
-
 }
+
+//Components of IBAN
+
+
+//Country Code (2 letters)
+//Example: JO for Jordan
+//The first two letters indicate the country of the account.
+
+//Check Digits (2 digits)
+//The two check digits help validate the IBAN and are calculated using an algorithm. They ensure that the IBAN is valid and not mistyped.
+
+//Bank Identifier (Bank Code)
+//A sequence of digits or letters that represent the bank responsible for the account.
+//Example: CBJO for the Central Bank of Jordan.
+
+//        Branch Code (Optional)
+//Some countries may require a branch code as part of the IBAN.
+//Example: 0101 (for a specific branch).
+
+//Account Number (Basic Bank Account Number or BBAN)
+//The actual account number, padded to a specific length (depending on the country).
+//Example: 1234567890123.
