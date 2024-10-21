@@ -22,38 +22,27 @@ public class SysUser {
 
     private String username;
 
-
     private String password;
 
-
     private String email;
-
 
     private String fullName;
 
     private String phoneNumber;
 
-
     private Long nationalId;
-
 
     private String nationality;
 
-
     private UserRole role;// enum
-
 
     private String dateOfBirth;
 
-
     private String address;
-
 
     private String createdAt;
 
-
     private String updatedAt;
-
 
     private UserStatus statue;
 

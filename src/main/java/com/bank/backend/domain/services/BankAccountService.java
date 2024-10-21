@@ -3,6 +3,7 @@ package com.bank.backend.domain.services;
 import com.bank.backend.domain.enums.AccountStatus;
 import com.bank.backend.domain.enums.AccountType;
 import com.bank.backend.domain.model.BankAccount;
+import com.bank.backend.persistance.entity.BankAccountEntity;
 import com.bank.backend.persistance.repository.BankAccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,18 +17,30 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class BankAccountService {
     private final BankAccountRepository bankAccountRepository;
-    private static final String COUNTRY_CODE = "JO"; // Example: Jordan
-    private static final String BANK_CODE = "0012";
-    private static final HashSet<String> generatedIbans = new HashSet<>();
 
 
-    public BankAccount createBankAccount(BankAccount bankAccount) {
+
+        public BankAccount createBankAccount(BankAccount bankAccount) {
         bankAccount.setCreatedAt(LocalDateTime.now());
         bankAccount.setUpdatedAt(LocalDateTime.now());
         bankAccount.setStatus(AccountStatus.ACTIVE);
         bankAccount.setAccountNumber(createAccountNumber());
         bankAccount.setIban(createIpanNumber());
 
+        return bankAccountRepository.createBankAccount(bankAccount);
+
+    }
+
+    private String createIpanNumber() {
+        String timestamp = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+
+        // Generate a 6-digit random number
+        Random random = new Random();
+        int randomNumber = 100000 + random.nextInt(900009); // range: 100000 to 999999
+
+        // Combine timestamp and random number to form the account number
+        return timestamp + randomNumber;
     }
 
     public String createAccountNumber(){
@@ -43,14 +56,17 @@ public class BankAccountService {
         return timestamp + randomNumber;
     }
 
-    public String createIpanNumber(){
-        String iban;
-        do {
-            iban = generateIban();
-        } while (!isUnique(iban)); // Ensure uniqueness by checking generated IBANs
 
-        generatedIbans.add(iban); // Store the IBAN to track uniqueness
-        return iban;
+    public Boolean deleteBankAccount(Long id) {
+        return bankAccountRepository.deleteById(id);
+    }
+
+    public BankAccount getBankAccount(Long id) {
+        return bankAccountRepository.getById(id);
+    }
+
+    public Boolean updateBankAccountStatus(Long id,AccountStatus accountStatus) {
+        return bankAccountRepository.updateAccountStatusById(id,accountStatus);
     }
 }
 // function that generate bank

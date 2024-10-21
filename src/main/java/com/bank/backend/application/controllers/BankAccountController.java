@@ -2,18 +2,17 @@ package com.bank.backend.application.controllers;
 
 import com.bank.backend.application.dtos.bankaccount.CreateBankAccountRequest;
 import com.bank.backend.application.dtos.bankaccount.CreateBankAccountResponse;
+import com.bank.backend.application.dtos.bankaccount.UpdateBankAccountStatusRequest;
+import com.bank.backend.domain.enums.AccountStatus;
 import com.bank.backend.domain.mapper.BankAccountMapper;
 import com.bank.backend.domain.model.BankAccount;
 import com.bank.backend.domain.services.BankAccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1/bankAccount")
 @RequiredArgsConstructor
 public class BankAccountController {
     private final BankAccountService bankAccountService;
@@ -27,6 +26,22 @@ public class BankAccountController {
 
         return ResponseEntity.ok(response);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteBankAccount(@PathVariable Long id){
+        return ResponseEntity.ok(bankAccountService.deleteBankAccount(id));
+    }
+    @GetMapping
+    public ResponseEntity<BankAccount> getBankAccount(@PathVariable Long id){ //bank id
+        return ResponseEntity.ok(bankAccountService.getBankAccount(id));
+    }
+
+    @PutMapping
+    public ResponseEntity<Boolean> updateBankAccountStatus(@RequestBody UpdateBankAccountStatusRequest request){
+        BankAccount bankAccount= bankAccountMapper.requestToModel(request);
+        return  ResponseEntity.ok(bankAccountService.updateBankAccountStatus(bankAccount.getId(),bankAccount.getStatus()));
+    }
+
+
 
 }
 // create bank account (check status) =>
