@@ -33,7 +33,7 @@ public class BankAccountEntity {
     @Column(name="balance")
     private BigDecimal balance;
 
-    @Column(name="status")
+    @Column(name= "status")
     private AccountStatus status;
 
     @Column(name = "created_at")

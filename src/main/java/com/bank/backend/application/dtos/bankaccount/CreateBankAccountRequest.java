@@ -1,4 +1,4 @@
-package com.bank.backend.domain.model;
+package com.bank.backend.application.dtos.bankaccount;
 
 import com.bank.backend.domain.enums.AccountStatus;
 import com.bank.backend.domain.enums.AccountType;
@@ -14,22 +14,10 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankAccount {
-    private Long id;
-
-    private String accountNumber;
-
+public class CreateBankAccountRequest {
     private AccountType accountType;
 
     private BigDecimal balance;
-
-    private AccountStatus status;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
-    private String iban;
 
     private Long userId;
 }
