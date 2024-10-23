@@ -14,6 +14,13 @@ import org.springframework.stereotype.Repository;
 public class BankAccountAdapter implements BankAccountRepository {
     private final BankAccountJpaRepository bankAccountJpaRepository;
     private final BankAccountMapper bankAccountMapper;
+
+    @Override
+    public BankAccount createBankAccount(BankAccount bankAccount) {
+        BankAccountEntity bankAccountEntity= bankAccountMapper.ModelToEntity(bankAccount);
+        return bankAccountMapper.entityToModel(bankAccountJpaRepository.save(bankAccountEntity));
+    }
+
     @Override
     public Boolean deleteById(Long id) {
         if(getById(id) == null) {
@@ -35,12 +42,4 @@ public class BankAccountAdapter implements BankAccountRepository {
                 ()->new RuntimeException("id not found")
         ));
     }
-
-    @Override
-    public BankAccount createBankAccount(BankAccount bankAccount) {
-        BankAccountEntity bankAccountEntity= bankAccountMapper.ModelToEntity(bankAccount);
-        return bankAccountMapper.entityToModel(bankAccountJpaRepository.save(bankAccountEntity));
-    }
-
-
 }

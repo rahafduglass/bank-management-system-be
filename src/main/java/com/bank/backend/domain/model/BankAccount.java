@@ -2,6 +2,7 @@ package com.bank.backend.domain.model;
 
 import com.bank.backend.domain.enums.AccountStatus;
 import com.bank.backend.domain.enums.AccountType;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,16 @@ public class BankAccount {
     private String accountNumber;
 
     private AccountType accountType;
+
+
+    private String countryCode;
+
+    private String bankIdentifier;
+
+    private String branchCode;
+
+
+    private String currency;
 
     private BigDecimal balance;
 

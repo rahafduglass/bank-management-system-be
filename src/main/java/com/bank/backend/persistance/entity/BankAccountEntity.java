@@ -30,6 +30,18 @@ public class BankAccountEntity {
     @Column(name = "iban") //International Bank Account Number
     private String iban;
 
+    @Column(name = "country_code")
+    private String countryCode;
+
+    @Column(name = "bank_identifier")
+    private String bankIdentifier;
+
+    @Column(name = "branch_code")
+    private String branchCode;
+
+    @Column(name = "currency")
+    private String currency;
+
     @Column(name="balance")
     private BigDecimal balance;
 
@@ -70,9 +82,11 @@ public class BankAccountEntity {
 //A sequence of digits or letters that represent the bank responsible for the account.
 //Example: CBJO for the Central Bank of Jordan.
 
-//        Branch Code (Optional)
+//Branch Code (Optional)
 //Some countries may require a branch code as part of the IBAN.
 //Example: 0101 (for a specific branch).
+
+
 
 //Account Number (Basic Bank Account Number or BBAN)
 //The actual account number, padded to a specific length (depending on the country).

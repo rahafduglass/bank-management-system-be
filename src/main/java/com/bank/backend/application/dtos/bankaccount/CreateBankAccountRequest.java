@@ -17,7 +17,20 @@ import java.time.LocalDateTime;
 public class CreateBankAccountRequest {
     private AccountType accountType;
 
+
+    private String countryCode;
+
+    private String checkDigits;
+
+    private String bankIdentifier;
+
+    private String branchCode;
+
+
+    private String currency; // Add the currency field
+
     private BigDecimal balance;
+
 
     private Long userId;
 }

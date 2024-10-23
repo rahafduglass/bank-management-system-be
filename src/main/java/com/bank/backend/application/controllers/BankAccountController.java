@@ -20,10 +20,7 @@ public class BankAccountController {
     @PostMapping
     public ResponseEntity<CreateBankAccountResponse> createBankAccount(@RequestBody CreateBankAccountRequest request) {
         BankAccount bankAccount = bankAccountMapper.requestToModel(request);
-        BankAccount bankAccount2 = bankAccountService.createBankAccount(bankAccount);
-        CreateBankAccountResponse response = bankAccountMapper.modelToResponse(bankAccount2);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(bankAccountMapper.modelToResponse(bankAccountService.createBankAccount(bankAccount)));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteBankAccount(@PathVariable Long id){
@@ -42,19 +39,6 @@ public class BankAccountController {
 
 
 }
-// create bank account (check status) =>
-// active and frozen return runtime error
-// closed => delete the old one and create new one
-
-// user cant update account type !
-
-// delete bank account
-
-// get bank account (CAN SEE BALANCE)
-// bank account id (@path variable)
-
-// change account bank status (ACTIVE, FROZEN, CLOSED) @requestParam
-
 
 // about the system :
 // primary account => one card DEBIT, one card CREDIT only (on primary account only)
