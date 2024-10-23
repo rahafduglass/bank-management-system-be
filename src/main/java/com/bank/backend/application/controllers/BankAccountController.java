@@ -35,9 +35,6 @@ public class BankAccountController {
     public ResponseEntity<Boolean> updateBankAccountStatus(@PathVariable Long id,@RequestParam AccountStatus status){
         return  ResponseEntity.ok(bankAccountService.updateBankAccountStatus(id, status));
     }
-
-
-
 }
 
 // about the system :

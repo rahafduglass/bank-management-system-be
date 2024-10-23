@@ -44,6 +44,4 @@ public class CardsEntity {
     @ManyToOne
     @JoinColumn(name = "bank_account_id", referencedColumnName = "id")
     private BankAccountEntity bankAccount;
-// i am here :D
-    // alaa
 }
