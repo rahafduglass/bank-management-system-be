@@ -2,7 +2,6 @@ package com.bank.backend.application.controllers;
 
 import com.bank.backend.application.dtos.bankaccount.CreateBankAccountRequest;
 import com.bank.backend.application.dtos.bankaccount.CreateBankAccountResponse;
-import com.bank.backend.application.dtos.bankaccount.UpdateBankAccountStatusRequest;
 import com.bank.backend.domain.enums.AccountStatus;
 import com.bank.backend.domain.mapper.BankAccountMapper;
 import com.bank.backend.domain.model.BankAccount;
@@ -30,15 +29,14 @@ public class BankAccountController {
     public ResponseEntity<Boolean> deleteBankAccount(@PathVariable Long id){
         return ResponseEntity.ok(bankAccountService.deleteBankAccount(id));
     }
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<BankAccount> getBankAccount(@PathVariable Long id){ //bank id
         return ResponseEntity.ok(bankAccountService.getBankAccount(id));
     }
 
-    @PutMapping
-    public ResponseEntity<Boolean> updateBankAccountStatus(@RequestBody UpdateBankAccountStatusRequest request){
-        BankAccount bankAccount= bankAccountMapper.requestToModel(request);
-        return  ResponseEntity.ok(bankAccountService.updateBankAccountStatus(bankAccount.getId(),bankAccount.getStatus()));
+    @PutMapping("/{id}")
+    public ResponseEntity<Boolean> updateBankAccountStatus(@PathVariable Long id,@RequestParam AccountStatus status){
+        return  ResponseEntity.ok(bankAccountService.updateBankAccountStatus(id, status));
     }
 
 

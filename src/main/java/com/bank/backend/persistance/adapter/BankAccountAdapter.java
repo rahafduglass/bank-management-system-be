@@ -16,6 +16,9 @@ public class BankAccountAdapter implements BankAccountRepository {
     private final BankAccountMapper bankAccountMapper;
     @Override
     public Boolean deleteById(Long id) {
+        if(getById(id) == null) {
+            return false;
+        }
         bankAccountJpaRepository.deleteById(id);
         return true;
     }
@@ -28,7 +31,9 @@ public class BankAccountAdapter implements BankAccountRepository {
 
     @Override
     public BankAccount getById(Long id) {
-        return bankAccountMapper.entityToModel(bankAccountJpaRepository.getById(id));
+        return bankAccountMapper.entityToModel(bankAccountJpaRepository.findById(id).orElseThrow(
+                ()->new RuntimeException("id not found")
+        ));
     }
 
     @Override
