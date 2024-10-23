@@ -1,5 +1,7 @@
 package com.bank.backend.domain.model;
 
+import com.bank.backend.domain.enums.IncomeMethods;
+import com.bank.backend.domain.enums.TransactionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +18,15 @@ public class IncomeTransaction {
 
     private Long amount;
 
+    private IncomeMethods incomeMethods;
+
     private String description;
+
+    private String currency;
+
+    private String reference;
+
+    private TransactionStatus status;
 
     private LocalDateTime transactionDate;
 

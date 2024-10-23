@@ -1,5 +1,7 @@
 package com.bank.backend.persistance.entity;
 
+import com.bank.backend.domain.enums.IncomeMethods;
+import com.bank.backend.domain.enums.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,12 +23,25 @@ public class IncomeTransactionEntity {
     @Column(name = "amount")
     private Long amount;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "income_methods")
+    private IncomeMethods incomeMethods;
+
     @Column(name = "description")
     private String description;
 
-
     @Column(name = "transaction_date")
     private LocalDateTime transactionDate;
+
+    @Column(name = "currency")
+    private String currency;
+
+    @Column(name = "reference")
+    private String reference;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private TransactionStatus status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -37,5 +52,4 @@ public class IncomeTransactionEntity {
     @ManyToOne
     @JoinColumn(name = "bank_account_id", referencedColumnName = "id")
     private BankAccountEntity bankAccount;
-
 }

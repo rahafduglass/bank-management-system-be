@@ -1,5 +1,7 @@
 package com.bank.backend.persistance.entity;
 
+import com.bank.backend.domain.enums.OutcomeMethods;
+import com.bank.backend.domain.enums.TransactionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,9 +26,22 @@ public class OutcomeTransactionEntity {
     @Column(name = "description")
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "outcome_methods")
+    private OutcomeMethods outcomeMethods;
 
     @Column(name = "transaction_date")
     private LocalDateTime transactionDate;
+
+    @Column(name = "currency")
+    private String currency;
+
+    @Column(name = "reference")
+    private String reference;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private TransactionStatus status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
