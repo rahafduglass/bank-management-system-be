@@ -48,12 +48,4 @@ public class CardService {
     public CardStatus setCardStatus(Long id, CardStatus cardStatus) {
         return cardRepository.setCardStatus(id,cardStatus);
     }
-
-// create card endpoint :
-// roles             -> same account can't have the same type of card twice
-// request(dto)      -> bankAccountId, cardType  DEBIT, CREDIT
-// response          -> cardId, cardNumber
-// filled by service -> createdAt, updated_at, status
-// generated         -> expiryDate, cvv, cardNumber
-
 }

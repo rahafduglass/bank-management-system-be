@@ -30,7 +30,7 @@ public class CardController {
 
     @PutMapping("/{id}")
     public ResponseEntity<CardStatus> setCardStatus(@PathVariable Long id,@RequestParam CardStatus cardStatus){
-                return ResponseEntity.ok(cardService.setCardStatus(id,cardStatus));
+        return ResponseEntity.ok(cardService.setCardStatus(id,cardStatus));
     }
 }
 // create card endpoint :
