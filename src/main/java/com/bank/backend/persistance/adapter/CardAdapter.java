@@ -35,4 +35,12 @@ public class CardAdapter implements CardRepository {
         cardJpaRepository.updateCardStatus(id, cardStatus, LocalDateTime.now());
         return getCard(id).getStatus();
     }
+
+    @Override
+    public Card updateCardInfo(Long id, Card card) {
+        cardJpaRepository.updateCardInfo(id,card.getStatus(),card.getCardType(), LocalDateTime.now());
+        return cardMapper.entityToModel(cardJpaRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("id not found exception id= "+ id)
+        ));
+    }
 }

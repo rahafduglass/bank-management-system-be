@@ -12,4 +12,6 @@ public interface CardRepository {
     Card getCard(Long id);
 
     CardStatus setCardStatus(Long id, CardStatus cardStatus);
+
+    Card updateCardInfo(Long id, Card card);
 }

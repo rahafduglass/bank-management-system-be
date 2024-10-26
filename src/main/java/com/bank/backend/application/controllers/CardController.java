@@ -2,6 +2,7 @@ package com.bank.backend.application.controllers;
 
 import com.bank.backend.application.dtos.card.CreateCardRequest;
 import com.bank.backend.application.dtos.card.CreateCardResponse;
+import com.bank.backend.application.dtos.card.UpdateCardRequest;
 import com.bank.backend.domain.enums.CardStatus;
 import com.bank.backend.domain.mapper.CardMapper;
 import com.bank.backend.domain.model.Card;
@@ -32,7 +33,16 @@ public class CardController {
     public ResponseEntity<CardStatus> setCardStatus(@PathVariable Long id,@RequestParam CardStatus cardStatus){
         return ResponseEntity.ok(cardService.setCardStatus(id,cardStatus));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Card> updateCardInfo(@PathVariable Long id, @RequestBody UpdateCardRequest updateCardRequest){
+        Card card= cardMapper.requestToModel(updateCardRequest);
+        return ResponseEntity.ok(cardService.updateCardInfo(id,card));
+    }
 }
+//check "in setCardStatus" for the expiryDate before updating the status
+
+
 // create card endpoint :
 // roles             -> same account can't have the same type of card twice
 // request(dto)      -> bankAccountId, cardType  DEBIT, CREDIT

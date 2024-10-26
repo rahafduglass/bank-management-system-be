@@ -1,7 +1,6 @@
 package com.bank.backend.domain.services;
 
 import com.bank.backend.domain.enums.CardStatus;
-import com.bank.backend.domain.mapper.CardMapper;
 import com.bank.backend.domain.model.Card;
 import com.bank.backend.persistance.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class CardService {
     private final CardRepository cardRepository;
-    private final CardMapper cardMapper;
+
 
     public Card createCard(Card card) {
         card.setCreatedAt(LocalDateTime.now());
@@ -47,5 +46,9 @@ public class CardService {
 
     public CardStatus setCardStatus(Long id, CardStatus cardStatus) {
         return cardRepository.setCardStatus(id,cardStatus);
+    }
+
+    public Card updateCardInfo(Long id, Card card) {
+        return cardRepository.updateCardInfo(id,card);
     }
 }
