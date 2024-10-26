@@ -34,8 +34,6 @@ public class OutcomeTransactions {
 
     private LocalDateTime transactionDate;
 
-    private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
     private Long bankAccountId;
