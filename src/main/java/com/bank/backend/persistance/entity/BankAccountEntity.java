@@ -59,7 +59,7 @@ public class BankAccountEntity {
     private SysUserEntity user;
 
     @OneToMany(mappedBy = "bank_account")
-    private Set<CardsEntity> cards;
+    private Set<CardEntity> cards;
 
     @OneToMany(mappedBy = "bank_account")
     private Set<IncomeTransactionEntity> incomeTransactions;
