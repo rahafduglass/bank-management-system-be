@@ -19,4 +19,11 @@ public class CardAdapter implements CardRepository {
         CardEntity cardEntity = cardMapper.modelToEntity(card);
         return cardMapper.entityToModel(cardJpaRepository.save(cardEntity));
     }
+
+    @Override
+    public Card getCard(Long id) {
+        return cardMapper.entityToModel(cardJpaRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("id not found exception, id = "+ id)
+        ));
+    }
 }

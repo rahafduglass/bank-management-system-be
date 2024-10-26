@@ -2,15 +2,14 @@ package com.bank.backend.application.controllers;
 
 import com.bank.backend.application.dtos.card.CreateCardRequest;
 import com.bank.backend.application.dtos.card.CreateCardResponse;
+import com.bank.backend.domain.enums.CardStatus;
 import com.bank.backend.domain.mapper.CardMapper;
 import com.bank.backend.domain.model.Card;
 import com.bank.backend.domain.services.CardService;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/v1/cards")
 @RestController
@@ -24,7 +23,15 @@ public class CardController {
         Card card = cardMapper.requestToModel(createCardRequest);
         return ResponseEntity.ok(cardMapper.modelToResponse(cardService.createCard(card)));
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Card> getCard(@PathVariable Long id){
+        return ResponseEntity.ok(cardService.getCard(id));
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CardStatus> setCardStatus(@PathVariable Long id,@RequestParam CardStatus cardStatus){
+                return ResponseEntity.ok(cardService.setCardStatus(id,cardStatus));
+    }
 }
 // create card endpoint :
 // roles             -> same account can't have the same type of card twice
