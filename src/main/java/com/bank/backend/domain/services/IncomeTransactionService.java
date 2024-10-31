@@ -29,6 +29,7 @@ public class IncomeTransactionService {
             incomeTransaction.setStatus(TransactionStatus.FAILED);
         } else {
             incomeTransaction.setStatus(TransactionStatus.COMPLETED);
+            bankAccountRepository.updateBalance(bankAccount.getId(), incomeTransaction.getAmount());
         }
 
         return incomeTransactionRepository.save(incomeTransaction);
@@ -53,8 +54,8 @@ public class IncomeTransactionService {
         BankAccount bankAccount = bankAccountRepository.getById(incomeTransaction.getBankAccountId());
         if (accountUtils.isAccountActive(bankAccount.getAccountNumber())) {
             incomeTransactionRepository.updateStatus(id, TransactionStatus.COMPLETED);
+            bankAccountRepository.updateBalance(bankAccount.getId(), incomeTransaction.getAmount());
         }
-
         return getIncomeTransactionById(id);
     }
 }

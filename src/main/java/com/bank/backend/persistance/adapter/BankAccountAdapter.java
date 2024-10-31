@@ -9,6 +9,9 @@ import com.bank.backend.persistance.repository.BankAccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Repository
 @RequiredArgsConstructor
 public class BankAccountAdapter implements BankAccountRepository {
@@ -24,6 +27,12 @@ public class BankAccountAdapter implements BankAccountRepository {
     @Override
     public Boolean isAccountActive(String accountNumber) {
         return bankAccountJpaRepository.isAccountActive(accountNumber);
+    }
+
+    @Override
+    public void updateBalance(Long id, BigDecimal amount) {
+        LocalDateTime now = LocalDateTime.now();
+        bankAccountJpaRepository.updateBalance(id, amount, now);
     }
 
     @Override

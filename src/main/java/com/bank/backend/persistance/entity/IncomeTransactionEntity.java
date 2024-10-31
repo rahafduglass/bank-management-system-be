@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity(name = "income_transaction")
@@ -21,7 +22,7 @@ public class IncomeTransactionEntity { // 9
     private Long id;
 
     @Column(name = "amount")
-    private Long amount;
+    private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "income_methods")

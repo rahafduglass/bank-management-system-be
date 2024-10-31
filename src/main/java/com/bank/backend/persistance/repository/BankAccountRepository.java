@@ -5,6 +5,8 @@ import com.bank.backend.domain.model.BankAccount;
 import com.bank.backend.persistance.entity.BankAccountEntity;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+
 @Repository
 public interface BankAccountRepository {
     Boolean deleteById(Long id);
@@ -16,4 +18,6 @@ public interface BankAccountRepository {
     BankAccount createBankAccount(BankAccount bankAccount);
 
     Boolean isAccountActive(String accountNumber);
+
+    void updateBalance(Long id, BigDecimal amount);
 }
