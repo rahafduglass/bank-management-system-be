@@ -45,13 +45,5 @@ public class IncomeTransactionController {
 }
 
 
-// process endpoint :
-//+ roles   -> add on balance total
-//+ bank account should be ACTIVE
-// request ->  amount, incomeMethods, description, currency, reference, bank Account id (dto)
-// response->  status, id (dto)
-
-
-// retry Transaction endpoint (for Rejected only)
 
 

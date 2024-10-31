@@ -2,7 +2,6 @@ package com.bank.backend.persistance.repository;
 
 import com.bank.backend.domain.enums.AccountStatus;
 import com.bank.backend.domain.model.BankAccount;
-import com.bank.backend.persistance.entity.BankAccountEntity;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;

@@ -1,11 +1,8 @@
 package com.bank.backend.persistance.adapter;
 
-
 import com.bank.backend.domain.enums.TransactionStatus;
 import com.bank.backend.domain.mapper.OutcomeTransactionMapper;
-import com.bank.backend.domain.model.IncomeTransaction;
 import com.bank.backend.domain.model.OutcomeTransaction;
-import com.bank.backend.persistance.entity.IncomeTransactionEntity;
 import com.bank.backend.persistance.entity.OutcomeTransactionEntity;
 import com.bank.backend.persistance.jpa.OutcomeTransactionJpaRepository;
 import com.bank.backend.persistance.repository.OutcomeTransactionRepository;

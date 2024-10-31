@@ -1,6 +1,5 @@
 package com.bank.backend.persistance.adapter;
 
-
 import com.bank.backend.domain.enums.TransactionStatus;
 import com.bank.backend.domain.mapper.IncomeTransactionMapper;
 import com.bank.backend.domain.model.IncomeTransaction;
@@ -8,7 +7,6 @@ import com.bank.backend.persistance.entity.IncomeTransactionEntity;
 import com.bank.backend.persistance.jpa.IncomeTransactionJpaRepository;
 import com.bank.backend.persistance.repository.IncomeTransactionRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.engine.transaction.jta.platform.internal.WebSphereExtendedJtaPlatform;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
