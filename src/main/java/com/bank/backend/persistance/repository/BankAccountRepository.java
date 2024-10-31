@@ -14,4 +14,6 @@ public interface BankAccountRepository {
     BankAccount getById(Long id);
 
     BankAccount createBankAccount(BankAccount bankAccount);
+
+    Boolean isAccountActive(String accountNumber);
 }

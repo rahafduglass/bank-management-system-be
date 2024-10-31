@@ -23,11 +23,10 @@ public class IncomeTransactionController {
         return ResponseEntity.ok(incomeTransactionMapper.modelToResponse(incomeTransactionService.createIncomeTransaction(incomeTransaction)));
     }
 
-//    @PostMapping
-//    public ResponseEntity<IncomeTransactionResponse> retryIncomeTransaction(@RequestBody IncomeTransactionRequest request) {
-//        IncomeTransaction incomeTransaction = incomeTransactionMapper.requestToModel(request);
-//        return ResponseEntity.ok(incomeTransactionMapper.modelToResponse(incomeTransactionService.createIncomeTransaction(incomeTransaction)));
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<IncomeTransactionResponse> retryIncomeTransaction(@PathVariable Long id) {
+        return ResponseEntity.ok(incomeTransactionMapper.modelToResponse(incomeTransactionService.retryIncomeTransaction(id)));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<IncomeTransaction> getIncomeTransactionById(@PathVariable Long id) {
@@ -42,7 +41,6 @@ public class IncomeTransactionController {
             @RequestParam(defaultValue = "desc", name = "sortDirection") String sortDirection) {
         return ResponseEntity.ok(incomeTransactionService.getAllIncomeTransactions(page, size, sortBy, sortDirection));
     }
-
 }
 
 
@@ -52,9 +50,6 @@ public class IncomeTransactionController {
 // request ->  amount, incomeMethods, description, currency, reference, bank Account id (dto)
 // response->  status, id (dto)
 
-// get transaction : @PathVariable (id)
-
-// get all : @requestParam
 
 // retry Transaction endpoint (for Rejected only)
 

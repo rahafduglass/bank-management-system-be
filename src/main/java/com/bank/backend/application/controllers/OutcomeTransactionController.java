@@ -1,6 +1,26 @@
 package com.bank.backend.application.controllers;
 
+import com.bank.backend.domain.mapper.OutcomeTransactionMapper;
+import com.bank.backend.domain.model.OutcomeTransactions;
+import com.bank.backend.domain.services.OutcomeTransactionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/outcomeTransaction")
 public class OutcomeTransactionController {
+    private final OutcomeTransactionService outcomeTransactionService;
+    private final OutcomeTransactionMapper outcomeTransactionMapper;
+    @GetMapping("{/id}")
+    public ResponseEntity<OutcomeTransactions> getOutcomeTransactions(@PathVariable Long id) {
+        OutcomeTransactions outcomeTransactions= outcomeTransactionService.getOutcomeTransactions(id);
+        return ResponseEntity.ok(outcomeTransactions);
+    }
 }
 
 // process endpoint :

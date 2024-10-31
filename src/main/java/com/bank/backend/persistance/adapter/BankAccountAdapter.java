@@ -22,6 +22,11 @@ public class BankAccountAdapter implements BankAccountRepository {
     }
 
     @Override
+    public Boolean isAccountActive(String accountNumber) {
+        return bankAccountJpaRepository.isAccountActive(accountNumber);
+    }
+
+    @Override
     public Boolean deleteById(Long id) {
         if(getById(id) == null) {
             return false;

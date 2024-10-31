@@ -1,6 +1,7 @@
 package com.bank.backend.persistance.adapter;
 
 
+import com.bank.backend.domain.enums.TransactionStatus;
 import com.bank.backend.domain.mapper.IncomeTransactionMapper;
 import com.bank.backend.domain.model.IncomeTransaction;
 import com.bank.backend.persistance.entity.IncomeTransactionEntity;
@@ -11,6 +12,7 @@ import org.hibernate.engine.transaction.jta.platform.internal.WebSphereExtendedJ
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -47,4 +49,12 @@ public class IncomeTransactionAdapter implements IncomeTransactionRepository {
 
         return new PageImpl<>(tasks, pageable, entities.getTotalElements());
     }
+
+    @Override
+    public void updateStatus(Long id, TransactionStatus transactionStatus) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        incomeTransactionJpaRepository.updateStatus(id, currentTime, transactionStatus);
+    }
+
+
 }
