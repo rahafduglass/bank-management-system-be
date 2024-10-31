@@ -17,6 +17,7 @@ public class IncomeTransactionController {
     private final IncomeTransactionService incomeTransactionService;
     private final IncomeTransactionMapper incomeTransactionMapper;
 
+
     @PostMapping
     public ResponseEntity<IncomeTransactionResponse> createIncomeTransaction(@RequestBody IncomeTransactionRequest request) {
         IncomeTransaction incomeTransaction = incomeTransactionMapper.requestToModel(request);

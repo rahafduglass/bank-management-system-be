@@ -1,10 +1,7 @@
-package com.bank.backend.domain.model;
+package com.bank.backend.application.dtos.outcometransaction;
 
 import com.bank.backend.domain.enums.OutcomeMethods;
 import com.bank.backend.domain.enums.TransactionStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,9 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OutcomeTransactions {
-    private Long id;
-
+public class OutcomeTransactionRequest {
     private BigDecimal amount;
 
     private OutcomeMethods outcomeMethods;
@@ -29,12 +24,6 @@ public class OutcomeTransactions {
     private String currency;
 
     private String reference;
-
-    private TransactionStatus status;
-
-    private LocalDateTime transactionDate;
-
-    private LocalDateTime updatedAt;
 
     private Long bankAccountId;
 }

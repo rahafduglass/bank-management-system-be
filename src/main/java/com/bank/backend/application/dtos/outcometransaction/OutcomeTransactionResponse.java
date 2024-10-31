@@ -1,4 +1,4 @@
-package com.bank.backend.application.dtos.incometransaction;
+package com.bank.backend.application.dtos.outcometransaction;
 
 import com.bank.backend.domain.enums.TransactionStatus;
 import lombok.AllArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class IncomeTransactionResponse {
-    private String id;
+public class OutcomeTransactionResponse {
+    private Long id;
 
     private TransactionStatus transactionStatus;
 }

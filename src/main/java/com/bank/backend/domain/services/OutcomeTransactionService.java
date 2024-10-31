@@ -1,17 +1,65 @@
 package com.bank.backend.domain.services;
 
-import com.bank.backend.domain.mapper.OutcomeTransactionMapper;
-import com.bank.backend.domain.model.OutcomeTransactions;
+import com.bank.backend.domain.enums.TransactionStatus;
+import com.bank.backend.domain.model.BankAccount;
+import com.bank.backend.domain.model.IncomeTransaction;
+import com.bank.backend.domain.model.OutcomeTransaction;
+import com.bank.backend.domain.utils.AccountUtils;
+import com.bank.backend.persistance.repository.BankAccountRepository;
 import com.bank.backend.persistance.repository.OutcomeTransactionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class OutcomeTransactionService {
-    OutcomeTransactionRepository outcomeTransactionRepository;
-    OutcomeTransactionMapper outcomeTransactionMapper;
-    public OutcomeTransactions getOutcomeTransactions(Long id) {
-        return outcomeTransactionRepository.getOutcomeTransactions(id);
+    private final OutcomeTransactionRepository outcomeTransactionRepository;
+    private final BankAccountRepository bankAccountRepository;
+    private final AccountUtils accountUtils;
+
+
+    public OutcomeTransaction createOutcomeTransaction(OutcomeTransaction outcomeTransaction) {
+        outcomeTransaction.setUpdatedAt(LocalDateTime.now());
+        outcomeTransaction.setTransactionDate(LocalDateTime.now());
+        outcomeTransaction.setStatus(TransactionStatus.PENDING);
+
+        BankAccount bankAccount = bankAccountRepository.getById(outcomeTransaction.getBankAccountId());
+        if (!accountUtils.isAccountActive(bankAccount.getAccountNumber())) {
+            outcomeTransaction.setStatus(TransactionStatus.FAILED);
+        } else {
+            outcomeTransaction.setStatus(TransactionStatus.COMPLETED);
+            bankAccountRepository.updateBalance(bankAccount.getId(),  outcomeTransaction.getAmount().multiply(new BigDecimal(-1)));
+        }
+
+        return  outcomeTransactionRepository.save(outcomeTransaction);
     }
+
+    public OutcomeTransaction getOutcomeTransactionById(Long id) {
+        return outcomeTransactionRepository.getOutcomeTransactionById(id);
+    }
+
+    public Page<OutcomeTransaction> getAllOutcomeTransactions(int page, int size, String sortBy, String sortDirection) {
+        return outcomeTransactionRepository.getAllOutcomeTransactions(page, size, sortBy, sortDirection);
+    }
+
+    public OutcomeTransaction retryOutcomeTransaction(Long id) {
+        OutcomeTransaction outcomeTransaction = getOutcomeTransactionById(id);
+        if (!outcomeTransaction.getStatus().equals(TransactionStatus.FAILED)) {
+            throw new RuntimeException("transaction status is not FAILED");
+        }
+
+        outcomeTransaction.setStatus(TransactionStatus.PENDING);
+
+        BankAccount bankAccount = bankAccountRepository.getById(outcomeTransaction.getBankAccountId());
+        if (accountUtils.isAccountActive(bankAccount.getAccountNumber())) {
+            outcomeTransactionRepository.updateStatus(id, TransactionStatus.COMPLETED);
+            bankAccountRepository.updateBalance(bankAccount.getId(), outcomeTransaction.getAmount().multiply(new BigDecimal(-1)));
+        }
+        return getOutcomeTransactionById(id);
+    }
+
 }
