@@ -17,7 +17,7 @@ public interface BankAccountJpaRepository extends JpaRepository<BankAccountEntit
     @Modifying
     @Transactional
     @Query("UPDATE bank_account b SET b.status = :accountStatus WHERE b.id = :id")
-    void updateAccountStatusById(@Param("id") Long id, @Param("accountStatus") AccountStatus accountStatus);
+    void updateAccountStatusById(@Param("id") Long id, @Param("accountStatus") String accountStatus);
 
 
     @Query("SELECT CASE WHEN COUNT(ba) > 0 THEN TRUE ELSE FALSE END " +

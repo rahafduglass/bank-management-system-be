@@ -25,6 +25,7 @@ public class BankAccountEntity {
     private String accountNumber;
 
     @Column(name="account_type")
+    @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
     @Column(name = "iban") //International Bank Account Number
@@ -46,25 +47,23 @@ public class BankAccountEntity {
     private BigDecimal balance;
 
     @Column(name= "status")
+    @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
     @ManyToOne
     @JoinColumn(name = "user_id" ,referencedColumnName = "id")
     private SysUserEntity user;
 
-    @OneToMany(mappedBy = "bank_account")
+    @OneToMany(mappedBy = "bankAccount")
     private Set<CardEntity> cards;
 
-    @OneToMany(mappedBy = "bank_account")
+    @OneToMany(mappedBy = "bankAccount")
     private Set<IncomeTransactionEntity> incomeTransactions;
 
-    @OneToMany(mappedBy = "bank_account")
+    @OneToMany(mappedBy = "bankAccount")
     private Set<OutcomeTransactionEntity> outcomeTransactions;
 }
 

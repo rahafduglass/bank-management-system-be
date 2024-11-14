@@ -21,7 +21,7 @@ public class EventEntity {
     private String eventType;
 
     @Column(name = "object")
-    private Object object;
+    private String object;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

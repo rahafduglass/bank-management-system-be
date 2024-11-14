@@ -59,6 +59,6 @@ public class SysUserEntity {
     @Column(name="statue")
     private UserStatus statue;
 
-    @OneToMany(mappedBy = "sys_user")
+    @OneToMany(mappedBy = "user")
     private Set<BankAccountEntity> bankAccounts;
 }

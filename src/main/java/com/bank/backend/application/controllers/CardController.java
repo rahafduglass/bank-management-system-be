@@ -28,7 +28,7 @@ public class CardController {
         return ResponseEntity.ok(cardService.getCard(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/status/{id}")
     public ResponseEntity<CardStatus> setCardStatus(@PathVariable Long id,@RequestParam CardStatus cardStatus){
         return ResponseEntity.ok(cardService.setCardStatus(id,cardStatus));
     }

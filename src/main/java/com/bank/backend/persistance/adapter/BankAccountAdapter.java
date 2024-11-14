@@ -46,7 +46,7 @@ public class BankAccountAdapter implements BankAccountRepository {
 
     @Override
     public Boolean updateAccountStatusById(Long id, AccountStatus accountStatus) {
-        bankAccountJpaRepository.updateAccountStatusById(id, accountStatus);
+        bankAccountJpaRepository.updateAccountStatusById(id, accountStatus.name());
         return true;
     }
 
