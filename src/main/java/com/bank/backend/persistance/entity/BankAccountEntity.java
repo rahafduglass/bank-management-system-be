@@ -53,6 +53,10 @@ public class BankAccountEntity {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
+
+
     @ManyToOne
     @JoinColumn(name = "user_id" ,referencedColumnName = "id")
     private SysUserEntity user;

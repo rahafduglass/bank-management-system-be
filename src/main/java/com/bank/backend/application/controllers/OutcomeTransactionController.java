@@ -37,7 +37,7 @@ public class OutcomeTransactionController {
     public ResponseEntity<Page<OutcomeTransaction>> getAllOutcomeTransactions(
             @RequestParam(defaultValue = "0", name = "page") int page,
             @RequestParam(defaultValue = "10", name = "size") int size,
-            @RequestParam(defaultValue = "createdAt", name = "sortBy") String sortBy,
+            @RequestParam(defaultValue = "transactionDate", name = "sortBy") String sortBy,
             @RequestParam(defaultValue = "desc", name = "sortDirection") String sortDirection) {
         return ResponseEntity.ok(outcomeTransactionService.getAllOutcomeTransactions(page, size, sortBy, sortDirection));
     }

@@ -44,16 +44,16 @@ public class SysUserEntity {
     @Column(name="role")
     private UserRole role;// enum
 
-    @Column(name="date-of-birth")
+    @Column(name="date_of_birth")
     private String dateOfBirth;
 
     @Column(name="address")
     private String address;
 
-    @Column(name="createdAt")
+    @Column(name="created_at")
     private String createdAt;
 
-    @Column(name="updatedAt")
+    @Column(name="updated_at")
     private String updatedAt;
 
     @Column(name="statue")

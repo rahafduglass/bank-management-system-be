@@ -38,7 +38,7 @@ public class IncomeTransactionController {
     public ResponseEntity<Page<IncomeTransaction>> getAllIncomeTransactions(
             @RequestParam(defaultValue = "0", name = "page") int page,
             @RequestParam(defaultValue = "10", name = "size") int size,
-            @RequestParam(defaultValue = "createdAt", name = "sortBy") String sortBy,
+            @RequestParam(defaultValue = "transactionDate", name = "sortBy") String sortBy,
             @RequestParam(defaultValue = "desc", name = "sortDirection") String sortDirection) {
         return ResponseEntity.ok(incomeTransactionService.getAllIncomeTransactions(page, size, sortBy, sortDirection));
     }
