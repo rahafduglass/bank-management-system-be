@@ -1,6 +1,6 @@
 package com.bank.backend.domain.model;
 
-import com.bank.backend.domain.enums.UserRole;
+
 import com.bank.backend.domain.enums.UserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -34,18 +37,13 @@ public class SysUser {
 
     private String nationality;
 
-    private UserRole role;// enum
-
     private String dateOfBirth;
 
     private String address;
 
-    private String createdAt;
+    private LocalDateTime createdAt;
 
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
     private UserStatus statue;
-
-
-
 }

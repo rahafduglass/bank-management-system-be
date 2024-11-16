@@ -1,7 +1,10 @@
 package com.bank.backend.application.controllers;
 
-import com.bank.backend.application.dtos.idm.UserAuthenticationRequest;
-import com.bank.backend.application.dtos.idm.UserAuthenticationResponse;
+import com.bank.backend.application.dtos.authentication.UserAuthenticationRequest;
+import com.bank.backend.application.dtos.authentication.UserAuthenticationResponse;
+import com.bank.backend.application.dtos.register.RegisterRequest;
+import com.bank.backend.application.dtos.register.RegisterResponse;
+import com.bank.backend.domain.mapper.RegisterMapper;
 import com.bank.backend.domain.mapper.UserAuthenticationMapper;
 import com.bank.backend.domain.model.SysUser;
 import com.bank.backend.domain.services.IdmService;
@@ -14,7 +17,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class IdmController {
     private final IdmService idmService;
+    private final RegisterMapper registerMapper;
     private final UserAuthenticationMapper userAuthenticationMapper;
+
+
+    @PostMapping("/register")
+    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request){
+        return ResponseEntity.ok(registerMapper.modelToResponse(idmService.register(registerMapper.requestToModel(request))));
+    }
 
     @PostMapping("/login")
     public ResponseEntity<UserAuthenticationResponse> login(@RequestBody UserAuthenticationRequest request){

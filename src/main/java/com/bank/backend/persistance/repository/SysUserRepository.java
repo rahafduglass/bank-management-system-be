@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysUserRepository {
     SysUser findByUsername(String username);
+
+    SysUser save(SysUser user);
+
+    boolean isUsernameAlreadyExists(String username);
 }

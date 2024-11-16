@@ -5,7 +5,10 @@ import com.bank.backend.persistance.entity.SysUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface SysUserJpaRepository extends JpaRepository<SysUserEntity,Long> {
-    SysUser findByUsername(String username);
+    Optional<SysUserEntity> findByUsername(String username);
+    Boolean existsByUsername(String username);
 }

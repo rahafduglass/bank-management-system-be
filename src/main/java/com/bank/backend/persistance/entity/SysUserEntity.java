@@ -1,12 +1,12 @@
 package com.bank.backend.persistance.entity;
 
-import com.bank.backend.domain.enums.UserRole;
 import com.bank.backend.domain.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity(name="sys_user")
@@ -41,9 +41,6 @@ public class SysUserEntity {
     @Column(name="nationality")
     private String nationality;
 
-    @Column(name="role")
-    private UserRole role;// enum
-
     @Column(name="date_of_birth")
     private String dateOfBirth;
 
@@ -51,10 +48,10 @@ public class SysUserEntity {
     private String address;
 
     @Column(name="created_at")
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name="updated_at")
-    private String updatedAt;
+    private LocalDateTime updatedAt;
 
     @Column(name="statue")
     private UserStatus statue;

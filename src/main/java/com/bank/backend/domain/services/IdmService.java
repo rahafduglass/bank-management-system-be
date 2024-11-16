@@ -1,6 +1,8 @@
 package com.bank.backend.domain.services;
 
+import com.bank.backend.application.exception.DuplicateResourceException;
 import com.bank.backend.application.exception.InvalidCredentialsException;
+import com.bank.backend.domain.enums.UserStatus;
 import com.bank.backend.domain.model.SysUser;
 import com.bank.backend.domain.model.UserAuthentication;
 import com.bank.backend.domain.services.security.JwtService;
@@ -12,7 +14,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +26,29 @@ public class IdmService {
     private final AuthenticationManager authenticationManager;
     private final SysUserDetailsService sysUserDetailsService;
     private final SysUserRepository sysUserRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public SysUser register(SysUser user) {
+        validateUserInfo(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        fillUpMissingInfo(user);
+        return sysUserRepository.save(user);
+    }
+    private void validateUserInfo(SysUser user) {
+
+        if(sysUserRepository.isUsernameAlreadyExists(user.getUsername())) {
+            throw new DuplicateResourceException("Username already exists");
+        }
+    }
+
+
+    private void fillUpMissingInfo(SysUser user) {
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
+        user.setStatue(UserStatus.ACTIVE);
+
+
+    }
 
     public UserAuthentication login(UserAuthentication userAuthentication) {
         Authentication authentication = getAuthenticationStatus(userAuthentication);

@@ -1,5 +1,6 @@
 package com.bank.backend.domain.handlers;
 
+import com.bank.backend.domain.model.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-import org.springframework.web.ErrorResponse;
+
 
 import java.io.IOException;
 import java.time.LocalDateTime;

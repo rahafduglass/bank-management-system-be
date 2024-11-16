@@ -1,7 +1,7 @@
 package com.bank.backend.domain.mapper;
 
-import com.bank.backend.application.dtos.idm.UserAuthenticationRequest;
-import com.bank.backend.application.dtos.idm.UserAuthenticationResponse;
+import com.bank.backend.application.dtos.authentication.UserAuthenticationRequest;
+import com.bank.backend.application.dtos.authentication.UserAuthenticationResponse;
 import com.bank.backend.domain.model.UserAuthentication;
 import org.mapstruct.Mapper;
 
