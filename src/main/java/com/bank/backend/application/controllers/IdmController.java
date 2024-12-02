@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
 @RestController
 @RequestMapping("/api/v1/idm")
 @RequiredArgsConstructor
@@ -34,5 +37,16 @@ public class IdmController {
     @GetMapping("/{username}")
     public ResponseEntity<SysUser> getUserByUsername(@PathVariable("username") String username){
         return ResponseEntity.ok(idmService.getUserByUsername(username));
+    }
+
+    @GetMapping("/obtain")
+    public ResponseEntity<Void> obtainOtp() throws NoSuchAlgorithmException, InvalidKeyException {
+        idmService.obtainOtp();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<Boolean> verifyOtp(@RequestParam String otp) throws NoSuchAlgorithmException, InvalidKeyException {
+        return ResponseEntity.ok(idmService.verifyOtp(otp));
     }
 }

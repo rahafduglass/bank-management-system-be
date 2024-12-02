@@ -5,10 +5,13 @@ import com.bank.backend.application.exception.InvalidCredentialsException;
 import com.bank.backend.domain.enums.UserStatus;
 import com.bank.backend.domain.model.SysUser;
 import com.bank.backend.domain.model.UserAuthentication;
+import com.bank.backend.domain.providers.IdentityProvider;
 import com.bank.backend.domain.services.security.JwtService;
+import com.bank.backend.domain.services.security.OtpService;
 import com.bank.backend.domain.services.security.SysUserDetailsService;
 import com.bank.backend.persistance.repository.SysUserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,8 +20,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class IdmService {
@@ -27,6 +33,8 @@ public class IdmService {
     private final SysUserDetailsService sysUserDetailsService;
     private final SysUserRepository sysUserRepository;
     private final PasswordEncoder passwordEncoder;
+    private final OtpService otpService;
+    private final IdentityProvider identityProvider;
 
     public SysUser register(SysUser user) {
         validateUserInfo(user);
@@ -83,5 +91,17 @@ public class IdmService {
 
     public SysUser getUserByUsername(String username) {
         return sysUserRepository.findByUsername(username);
+    }
+
+    public void obtainOtp() throws NoSuchAlgorithmException, InvalidKeyException {
+        SysUser user = identityProvider.currentIdentity();
+        String otp = otpService.generateOtp(user.getUsername());
+        // TODO : send otp to email
+        log.info("Generated OTP: {}", otp);
+    }
+
+
+    public Boolean verifyOtp(String otp) throws NoSuchAlgorithmException, InvalidKeyException {
+        return otpService.verifyOtp(otp, identityProvider.currentIdentity().getUsername());
     }
 }
